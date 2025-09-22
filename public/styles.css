@@ -1,0 +1,290 @@
+/* =========================================================
+   COOKING / FOOD THEME — Orange, Green, White, Beige
+   Drop in as /public/styles.css and link in your HTML.
+   Palette:
+     Orange (primary): #ff7a00
+     Green  (accent) : #2e7d32
+     Beige  (paper)  : #f7efe5
+     White           : #ffffff
+========================================================= */
+
+/* ---------------------- Design System ---------------------- */
+:root{
+  /* Core palette */
+  --orange: #ff7a00;
+  --orange-900:#b35200;
+  --orange-700:#e86e00;
+  --orange-600:#ff7a00;
+  --orange-500:#ff8a26;
+  --orange-200:#ffd8b3;
+
+  --green:  #2e7d32;
+  --green-700:#276b2a;
+  --green-500:#2e7d32;
+  --green-300:#66a36a;
+  --green-100:#d7ead9;
+
+  --beige:  #f7efe5;
+  --beige-200:#f2e6d8;
+  --beige-300:#ead9c6;
+
+  --white:  #ffffff;
+  --ink:    #1b1b1b;
+  --muted:  #6d6d6d;
+
+  /* Surfaces & states */
+  --bg:        var(--beige);
+  --panel:     #fffdf9;
+  --elev:      #ffffff;
+  --border:    rgba(0,0,0,.08);
+  --ring:      rgba(255,122,0,.28);
+
+  /* Effects */
+  --radius: 14px;
+  --shadow-1: 0 8px 24px rgba(0,0,0,.08);
+  --shadow-2: 0 16px 40px rgba(255,122,0,.18);
+}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg: #11110f;
+    --panel: #151513;
+    --elev: #1a1a18;
+    --ink: #f3f3f3;
+    --muted: #a7a7a7;
+    --border: rgba(255,255,255,.08);
+    --ring: rgba(255,138,38,.3);
+  }
+}
+
+/* ---------------------- Base & Resets ---------------------- */
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(900px 900px at 100% -10%, rgba(46,125,50,.08), transparent 40%),
+    radial-gradient(900px 900px at 0% 110%, rgba(255,122,0,.08), transparent 40%),
+    var(--bg);
+}
+
+img{ max-width:100%; display:block; }
+a{ color: var(--orange-700); text-decoration: none; }
+a:hover{ color: var(--orange-500); }
+
+/* ---------------------- Layout Utilities ---------------------- */
+.container{ max-width: 1100px; margin: 0 auto; padding: 24px; }
+.section{ padding-block: 36px; }
+.grid{ display:grid; gap: 16px; }
+.grid-2{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+.grid-3{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+@media (max-width: 960px){ .grid-3{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 640px){ .grid-3, .grid-2{ grid-template-columns: 1fr; } }
+
+.muted{ color: var(--muted); }
+.center{ text-align:center; }
+.hidden{ display:none !important; }
+.stack-sm > * + *{ margin-top: 8px; }
+.stack-md > * + *{ margin-top: 14px; }
+.stack-lg > * + *{ margin-top: 22px; }
+
+/* ---------------------- Surface Primitives ---------------------- */
+.card{
+  background: linear-gradient(180deg, var(--panel), color-mix(in hsl, var(--panel), #000 6%));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  padding: 18px;
+}
+.card--hover{ transition: transform .2s ease, box-shadow .2s ease; }
+.card--hover:hover{ transform: translateY(-2px); box-shadow: 0 20px 60px rgba(0,0,0,.12); }
+
+.card--paper{
+  position:relative;
+  background:
+    linear-gradient(180deg, var(--beige), color-mix(in hsl, var(--beige), #000 4%));
+}
+.card--paper::before{
+  content:"";
+  position:absolute; inset:0; pointer-events:none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 34px,
+    color-mix(in hsl, var(--ink), transparent 94%) 34px 35px
+  );
+  border-radius: inherit; opacity:.4;
+}
+
+/* Wood-look panel (hero or featured sections) */
+.panel-wood{
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.05), transparent 50%),
+    repeating-linear-gradient(90deg, #8d6e63 0 16px, #a67c68 16px 32px, #b2856e 32px 48px);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius: var(--radius);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), var(--shadow-1);
+}
+
+/* ---------------------- Typography ---------------------- */
+h1,h2,h3{ margin:0 0 10px 0; line-height:1.2; }
+h1{ font-size: clamp(1.9rem, 3.2vw, 2.6rem); }
+h2{ font-size: clamp(1.4rem, 2.4vw, 1.9rem); }
+h3{ font-size: 1.15rem; }
+
+/* ---------------------- Navbar ---------------------- */
+.nav{
+  position: sticky; top:0; z-index:10;
+  backdrop-filter: blur(8px);
+  background: color-mix(in hsl, var(--bg), var(--white) 8%);
+  border-bottom: 1px solid var(--border);
+}
+.nav__row{ display:flex; align-items:center; justify-content:space-between; }
+.brand{
+  font-weight: 800; font-size: 1.25rem; letter-spacing: .3px;
+  color: var(--green-500);
+}
+.brand .dot{ color: var(--orange-600); }
+.nav__links{ display:flex; align-items:center; gap: 14px; }
+.link{ color: var(--ink); opacity:.85; }
+.link:hover{ opacity:1; }
+
+/* ---------------------- Buttons ---------------------- */
+.btn{
+  --bg-btn: var(--orange-600);
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:.5rem; padding:.7rem 1rem; border-radius: 12px;
+  background: linear-gradient(180deg, var(--bg-btn), color-mix(in hsl, var(--bg-btn), #000 12%));
+  color:#fff; font-weight:600; border: none; cursor:pointer;
+  box-shadow: var(--shadow-2);
+  transition: transform .1s ease, filter .2s ease;
+}
+.btn:hover{ filter: brightness(1.05); }
+.btn:active{ transform: translateY(1px); }
+.btn-lg{ padding:.9rem 1.2rem; font-size:1.05rem; }
+
+.btn-outline{
+  background: transparent; color: var(--ink);
+  border:1px solid var(--border); box-shadow: var(--shadow-1);
+}
+.btn-ghost{ background: transparent; color: var(--ink); border:1px solid transparent; }
+.btn-success{ --bg-btn: var(--green-500); }
+.btn-danger{ --bg-btn: #d64545; }
+
+/* Color variants matching theme */
+.btn-orange{ --bg-btn: var(--orange-600); }
+.btn-green{ --bg-btn: var(--green-500); }
+.btn-beige{
+  background: var(--beige); color: var(--ink);
+  border:1px solid var(--border); box-shadow: var(--shadow-1);
+}
+
+/* ---------------------- Hero ---------------------- */
+.hero{
+  display:grid; grid-template-columns: 1.2fr .8fr; gap: 20px; align-items:center;
+  padding-block: 40px;
+}
+@media (max-width: 960px){ .hero{ grid-template-columns: 1fr; } }
+.hero__title .accent{ color: var(--orange-600); }
+.hero__subtitle{ color: var(--muted); max-width: 60ch; }
+.hero__actions{ display:flex; flex-wrap:wrap; gap: 12px; margin-top: 16px; }
+
+/* ---------------------- Divider (knife icon) ---------------------- */
+.divider{ --line: var(--border); position: relative; margin: 18px 0; height: 14px; }
+.divider::before,.divider::after{
+  content:""; position:absolute; top:50%; width: 42%; height:1px; background: var(--line);
+}
+.divider::before{ left:0; } .divider::after{ right:0; }
+.divider__icon{
+  display:inline-flex; align-items:center; justify-content:center;
+  width: 30px; height:30px; border-radius: 999px; background: var(--elev);
+  border:1px solid var(--border); color: var(--ink);
+  transform: translateY(-50%); position:relative; left:50%;
+}
+.utensil{ font-size: .95rem; }
+
+/* ---------------------- Badges & Tags ---------------------- */
+.badge{
+  display:inline-flex; align-items:center; gap:.35rem;
+  padding:.35rem .6rem; border-radius:999px; font-weight:700; font-size:.8rem;
+  background: var(--beige); color: var(--ink); border:1px solid var(--border);
+}
+.badge--spicy{ background: color-mix(in hsl, var(--orange-200), white 30%); color: var(--orange-900); }
+.badge--fresh{ background: var(--green-100); color: var(--green-700); }
+.badge--sweet{ background: #ffe9cc; color: #b06000; }
+
+.tag{
+  display:inline-block; padding:.35rem .55rem; border-radius: 999px;
+  background: color-mix(in hsl, var(--beige), white 40%);
+  border:1px solid var(--border); color: var(--ink); font-size:.8rem;
+}
+.tags{ display:flex; gap:.5rem; flex-wrap:wrap; }
+
+/* ---------------------- Forms ---------------------- */
+.form{ display:grid; gap: 14px; }
+.label{ font-weight: 700; }
+.input, .select, .textarea{
+  width:100%; background: var(--elev); color: var(--ink);
+  border:1px solid var(--border);
+  border-radius: 12px; padding:.8rem .9rem; outline: none;
+  transition: box-shadow .2s ease, border-color .2s ease;
+}
+.textarea{ min-height: 120px; resize: vertical; }
+.input:focus, .select:focus, .textarea:focus{
+  border-color: color-mix(in hsl, var(--orange-600), #000 10%);
+  box-shadow: 0 0 0 6px var(--ring);
+}
+.form__actions{ display:flex; gap:10px; justify-content:flex-end; }
+
+/* ---------------------- Tables ---------------------- */
+.table{
+  width:100%; border-collapse: collapse; font-size:.95rem; background: var(--elev);
+  border:1px solid var(--border); border-radius:12px; overflow:hidden;
+}
+.table th, .table td{ padding: 12px 14px; border-bottom:1px solid var(--border); }
+.table th{
+  text-align:left; background: color-mix(in hsl, var(--beige), white 50%);
+  font-weight: 800; color: var(--green-700);
+}
+.table tr:hover td{ background: color-mix(in hsl, var(--beige), white 70%); }
+
+/* ---------------------- Alerts / Notes ---------------------- */
+.alert{
+  padding: 12px 14px; border-radius: 12px; border:1px solid var(--border);
+  background: var(--elev);
+}
+.alert--success{ background: var(--green-100); color: var(--green-700); border-color: color-mix(in hsl, var(--green-300), #000 10%); }
+.alert--warn{ background: #fff1da; color: #9b5a00; border-color: #ffd39a; }
+.alert--info{ background: #eef6ff; color: #0b5cab; border-color: #b9d6ff; }
+
+/* ---------------------- Footer ---------------------- */
+.footer{
+  margin-top: 40px; padding: 26px; text-align:center;
+  color: var(--muted); border-top: 1px solid var(--border);
+  background: color-mix(in hsl, var(--bg), white 6%);
+}
+
+/* ---------------------- Fancy Extras ---------------------- */
+.ribbon{
+  position:absolute; top:12px; left:-6px;
+  background: linear-gradient(180deg, var(--orange-500), var(--orange-700));
+  color:#fff; padding:.38rem .6rem; font-weight:800; letter-spacing:.3px;
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+  box-shadow: var(--shadow-1);
+}
+.rating{ display:flex; gap:2px; }
+.star::before{ content:"⭐"; font-size:1rem; }
+.star--off{ opacity:.35; }
+
+/* ---------------------- Example Component Helpers ---------------------- */
+.card__header{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.card__title{ margin:0; font-size:1.05rem; }
+.card__footer{ margin-top:12px; display:flex; gap:10px; justify-content:flex-end; }
+
+/* ---------------------- Responsive tweaks ---------------------- */
+@media (max-width: 480px){
+  .btn{ width:100%; }
+  .nav__links{ gap:10px; }
+}

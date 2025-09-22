@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include('../partials/_head.ejs', { pageTitle: 'My Pantry' }) %>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+
+  <main class="container section">
+    <div class="section__header">
+      <h1>My Pantry</h1>
+      <a class="btn" href="/users/<%= user._id %>/foods/new">➕ Add New Item</a>
+    </div>
+
+    <% if (pantry && pantry.length) { %>
+      <ul class="grid grid-3">
+        <% pantry.forEach(item => { %>
+          <li class="card card--hover">
+            <div class="card__body">
+              <h3 class="card__title"><%= item.name %></h3>
+            </div>
+            <div class="card__footer">
+              <a class="btn btn-ghost" href="/users/<%= user._id %>/foods/<%= item._id %>/edit">Edit</a>
+              <form action="/users/<%= user._id %>/foods/<%= item._id %>?_method=DELETE" method="POST">
+                <button class="btn btn-danger" type="submit">Delete</button>
+              </form>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <div class="empty">
+        <p>No items yet.</p>
+        <a class="btn" href="/users/<%= user._id %>/foods/new">Add your first item</a>
+      </div>
+    <% } %>
+  </main>
+</body>
+</html>
+
+
+

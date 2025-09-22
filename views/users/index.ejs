@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include('../partials/_head.ejs', { pageTitle: 'Community' }) %>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+
+  <main class="container section">
+    <h1>Community</h1>
+    <% if (users && users.length) { %>
+      <ul class="grid grid-3">
+        <% users.forEach(u => { %>
+          <li class="card card--hover">
+            <div class="card__body">
+              <h3 class="card__title"><%= u.username %></h3>
+            </div>
+            <div class="card__footer">
+              <a class="btn" href="/users/<%= u._id %>">View Pantry</a>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <div class="empty"><p>No users yet.</p></div>
+    <% } %>
+  </main>
+</body>
+</html>

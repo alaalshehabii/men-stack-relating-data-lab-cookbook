@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include('../partials/_head.ejs', { pageTitle: otherUser.username + "'s Pantry" }) %>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+
+  <main class="container section">
+    <h1><%= otherUser.username %>’s Pantry</h1>
+    <% if (pantry && pantry.length) { %>
+      <ul class="grid grid-3">
+        <% pantry.forEach(item => { %>
+          <li class="card">
+            <div class="card__body">
+              <h3 class="card__title"><%= item.name %></h3>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <div class="empty"><p>This pantry is empty.</p></div>
+    <% } %>
+  </main>
+</body>
+</html>

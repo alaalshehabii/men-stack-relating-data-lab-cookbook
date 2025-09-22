@@ -1,23 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
-</head>
-<body>
-<% if (user) { %>
-<h1>Welcome to the app, <%= user.username %>!</h1>
-<p>
-  <a href="/auth/sign-out">Sign out</a>
-</p>
-<% } else { %>
-<h1>Welcome to the app, guest.</h1>
-<p>
-  <a href="/auth/sign-up">Sign up</a> or <a href="/auth/sign-in">Sign in</a>.
-</p>
-<% } %>
-<p><a href="/vip-lounge">Get into the VIP Users Only lounge!</a></p>
+  <head>
+    <%- include('./partials/_head.ejs', { pageTitle: 'CookBook – Home' }) %>
+  </head>
+  <body>
+    <%- include('./partials/_navbar.ejs') %>
 
-</body>
+    <main class="container hero">
+      <div>
+        <h1 class="hero__title">Organize your pantry.<br><span class="accent">Share inspiration.</span></h1>
+        <p class="hero__subtitle">
+          Add items, edit them, and explore other users’ pantries.
+        </p>
+        <div class="hero__actions">
+          <% if (user) { %>
+            <a class="btn btn-lg" href="/users/<%= user._id %>/foods">Open My Pantry</a>
+            <a class="btn btn-outline btn-lg" href="/users">Explore Community</a>
+          <% } else { %>
+            <a class="btn btn-lg" href="/auth/sign-up">Get Started</a>
+            <a class="btn btn-outline btn-lg" href="/auth/sign-in">Sign In</a>
+          <% } %>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>

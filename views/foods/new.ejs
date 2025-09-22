@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include('../partials/_head.ejs', { pageTitle: 'Add Item' }) %>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+
+  <main class="container section">
+    <h1>Add Item</h1>
+    <form class="form card" action="/users/<%= user._id %>/foods" method="POST">
+      <div class="form__row">
+        <label class="label" for="name">Item name</label>
+        <input class="input" id="name" name="name" type="text" placeholder="e.g. Basmati Rice" required>
+      </div>
+      <div class="form__actions">
+        <button class="btn" type="submit">Save</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

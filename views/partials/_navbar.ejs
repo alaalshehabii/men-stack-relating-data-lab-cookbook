@@ -1,0 +1,15 @@
+<header class="nav">
+  <div class="container nav__row">
+    <a href="/" class="brand">CookBook<span class="dot">.</span></a>
+    <nav class="nav__links">
+      <% if (user) { %>
+        <a class="link" href="/users/<%= user._id %>/foods">My Pantry</a>
+        <a class="link" href="/users">Community</a>
+        <a class="btn btn-ghost" href="/auth/sign-out">Sign Out</a>
+      <% } else { %>
+        <a class="link" href="/auth/sign-in">Sign In</a>
+        <a class="btn" href="/auth/sign-up">Sign Up</a>
+      <% } %>
+    </nav>
+  </div>
+</header>
