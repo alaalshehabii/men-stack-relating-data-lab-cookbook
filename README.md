@@ -21,4 +21,10 @@ CookBook is a recipe management web application where users can create, edit, an
 - **method-override** – support for PUT and DELETE requests  
 - **morgan** – request logging
 
+<img width="2773" height="1443" alt="image" src="https://github.com/user-attachments/assets/29589e99-8861-4f63-aeb5-5696f3446158" />
+
+<img width="2811" height="1581" alt="image" src="https://github.com/user-attachments/assets/306297cf-0e4d-4058-bcd9-5efc47937c64" />
+
+<img width="2723" height="1500" alt="image" src="https://github.com/user-attachments/assets/267887bf-7868-46ce-8c76-46fa2cc8cfd6" />
+
   
