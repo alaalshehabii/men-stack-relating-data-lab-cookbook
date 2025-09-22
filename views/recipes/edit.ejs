@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include('../partials/_head.ejs', { pageTitle: 'Edit ' + recipe.name }) %>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+
+  <main class="container section">
+    <div class="section__header">
+      <h1>Edit Recipe</h1>
+      <a class="btn btn-ghost" href="/recipes/<%= recipe._id %>">Cancel</a>
+    </div>
+
+    <form class="form card" action="/recipes/<%= recipe._id %>?_method=PUT" method="POST">
+      <div class="form__row">
+        <label class="label" for="name">Recipe name</label>
+        <input class="input" id="name" name="name" type="text" value="<%= recipe.name %>" required>
+      </div>
+
+      <div class="form__row">
+        <label class="label" for="instructions">Instructions</label>
+        <textarea class="textarea" id="instructions" name="instructions"><%= recipe.instructions %></textarea>
+      </div>
+
+      <div class="form__row">
+        <label class="label" for="ingredients">Ingredients (select)</label>
+        <select class="select" id="ingredients" name="ingredients" multiple size="6">
+          <% allIngredients.forEach(i => { %>
+            <option
+              value="<%= i._id %>"
+              <%= recipe.ingredients.some(id => String(id) === String(i._id)) ? 'selected' : '' %>
+            ><%= i.name %></option>
+          <% }) %>
+        </select>
+        <p class="muted">Hold Ctrl/Cmd to select multiple.</p>
+      </div>
+
+      <div class="form__row">
+        <label class="label" for="newIngredients">Add new ingredients (comma-separated)</label>
+        <input class="input" id="newIngredients" name="newIngredients" type="text" placeholder="e.g. Aleppo Pepper">
+      </div>
+
+      <div class="form__actions">
+        <button class="btn" type="submit">Update Recipe</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

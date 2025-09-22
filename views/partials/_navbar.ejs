@@ -3,7 +3,8 @@
     <a href="/" class="brand">CookBook<span class="dot">.</span></a>
     <nav class="nav__links">
       <% if (user) { %>
-        <a class="link" href="/users/<%= user._id %>/foods">My Pantry</a>
+        <a class="link" href="/recipes">My Recipes</a>
+        <a class="link" href="/ingredients">Ingredients</a>
         <a class="link" href="/users">Community</a>
         <a class="btn btn-ghost" href="/auth/sign-out">Sign Out</a>
       <% } else { %>

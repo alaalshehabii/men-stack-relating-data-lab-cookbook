@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include('../partials/_head.ejs', { pageTitle: 'My Recipes' }) %>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+
+  <main class="container section">
+    <div class="section__header">
+      <h1>My Recipes</h1>
+      <a class="btn" href="/recipes/new">➕ Add New Recipe</a>
+    </div>
+
+    <% if (recipes && recipes.length) { %>
+      <ul class="grid grid-3">
+        <% recipes.forEach(r => { %>
+          <li class="card card--hover">
+            <div class="card__body">
+              <h3 class="card__title"><%= r.name %></h3>
+            </div>
+            <div class="card__footer">
+              <a class="btn btn-ghost" href="/recipes/<%= r._id %>">View</a>
+              <a class="btn btn-ghost" href="/recipes/<%= r._id %>/edit">Edit</a>
+              <form action="/recipes/<%= r._id %>?_method=DELETE" method="POST">
+                <button class="btn btn-danger" type="submit">Delete</button>
+              </form>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <div class="empty">
+        <p>You have not created any recipes yet.</p>
+        <a class="btn" href="/recipes/new">Create your first recipe</a>
+      </div>
+    <% } %>
+  </main>
+</body>
+</html>

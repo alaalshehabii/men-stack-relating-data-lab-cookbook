@@ -17,8 +17,12 @@ const passUserToView = require('./middleware/pass-user-to-view.js');
 
 // Controllers
 const authController = require('./controllers/auth.js');
+// From your earlier lab (pantry + community)
 const foodsController = require('./controllers/foods.js');
 const usersController = require('./controllers/users.js');
+// NEW for this lab (recipes + ingredients)
+const recipesController = require('./controllers/recipes.js');
+const ingredientsController = require('./controllers/ingredients.js');
 
 // Port
 const port = process.env.PORT ? process.env.PORT : '3000';
@@ -47,16 +51,26 @@ app.use(
 );
 app.use(passUserToView);
 
-// --- ROUTES
+// --- PUBLIC ROUTES
 app.get('/', (req, res) => {
   res.render('index.ejs');
 });
 app.use('/auth', authController);
 
+// --- PROTECTED ROUTES
 app.use(isSignedIn);
+
+// Pantry (from earlier)
 app.use('/users/:userId/foods', foodsController);
+
+// Community (optional, from earlier)
 app.use('/users', usersController);
 
+// NEW: Recipes + Ingredients
+app.use('/recipes', recipesController);
+app.use('/ingredients', ingredientsController);
+
+// Example protected route
 app.get('/vip-lounge', (req, res) => {
   res.send(`Welcome to the party ${req.session.user.username}.`);
 });
@@ -65,4 +79,3 @@ app.get('/vip-lounge', (req, res) => {
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
 });
-

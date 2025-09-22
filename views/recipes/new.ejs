@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include('../partials/_head.ejs', { pageTitle: 'New Recipe' }) %>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+
+  <main class="container section">
+    <div class="section__header">
+      <h1>New Recipe</h1>
+      <a class="btn btn-ghost" href="/recipes">Back</a>
+    </div>
+
+    <form class="form card" action="/recipes" method="POST">
+      <div class="form__row">
+        <label class="label" for="name">Recipe name</label>
+        <input class="input" id="name" name="name" type="text" placeholder="e.g. Lemon Herb Chicken" required>
+      </div>
+
+      <div class="form__row">
+        <label class="label" for="instructions">Instructions</label>
+        <textarea class="textarea" id="instructions" name="instructions" placeholder="Steps, timing, tips..."></textarea>
+      </div>
+
+      <div class="form__row">
+        <label class="label" for="ingredients">Ingredients (select one or more)</label>
+        <select class="select" id="ingredients" name="ingredients" multiple size="6">
+          <% if (allIngredients && allIngredients.length) { %>
+            <% allIngredients.forEach(i => { %>
+              <option value="<%= i._id %>"><%= i.name %></option>
+            <% }) %>
+          <% } %>
+        </select>
+        <p class="muted">Hold Ctrl/Cmd to select multiple.</p>
+      </div>
+
+      <div class="form__row">
+        <label class="label" for="newIngredients">Add new ingredients (comma-separated)</label>
+        <input class="input" id="newIngredients" name="newIngredients" type="text" placeholder="e.g. Sumac, Smoked Paprika">
+        <p class="muted">We’ll create any new ingredients automatically.</p>
+      </div>
+
+      <div class="form__actions">
+        <button class="btn" type="submit">Save Recipe</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

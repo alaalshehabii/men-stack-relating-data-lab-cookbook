@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include('../partials/_head.ejs', { pageTitle: recipe.name }) %>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+
+  <main class="container section">
+    <div class="section__header">
+      <h1><%= recipe.name %></h1>
+      <div style="display:flex; gap:10px;">
+        <a class="btn btn-ghost" href="/recipes">Back</a>
+        <a class="btn btn-ghost" href="/recipes/<%= recipe._id %>/edit">Edit</a>
+        <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
+          <button class="btn btn-danger" type="submit">Delete</button>
+        </form>
+      </div>
+    </div>
+
+    <section class="card" style="margin-bottom:16px;">
+      <h3>Ingredients</h3>
+      <% if (recipe.ingredients && recipe.ingredients.length) { %>
+        <ul>
+          <% recipe.ingredients.forEach(i => { %>
+            <li><%= i.name %></li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p class="muted">No ingredients added.</p>
+      <% } %>
+    </section>
+
+    <section class="card">
+      <h3>Instructions</h3>
+      <% if (recipe.instructions) { %>
+        <p style="white-space:pre-wrap;"><%= recipe.instructions %></p>
+      <% } else { %>
+        <p class="muted">No instructions provided.</p>
+      <% } %>
+    </section>
+  </main>
+</body>
+</html>

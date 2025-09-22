@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include('../partials/_head.ejs', { pageTitle: 'Ingredients' }) %>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+
+  <main class="container section">
+    <div class="section__header">
+      <h1>Ingredients</h1>
+      <a class="btn btn-ghost" href="/recipes/new">Use in a Recipe</a>
+    </div>
+
+    <form class="form card" action="/ingredients" method="POST">
+      <div class="form__row">
+        <label class="label" for="name">Add Ingredient</label>
+        <input class="input" id="name" name="name" type="text" placeholder="e.g. Sumac" required>
+      </div>
+      <div class="form__actions">
+        <button class="btn" type="submit">Add</button>
+      </div>
+    </form>
+
+    <section class="section">
+      <% if (ingredients && ingredients.length) { %>
+        <ul class="grid grid-3">
+          <% ingredients.forEach(i => { %>
+            <li class="card">
+              <div class="card__body">
+                <h3 class="card__title"><%= i.name %></h3>
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <div class="empty"><p>No ingredients yet.</p></div>
+      <% } %>
+    </section>
+  </main>
+</body>
+</html>
